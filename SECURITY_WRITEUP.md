@@ -268,6 +268,4 @@ a strict improvement over the current behavior for malformed input.
 - **Hosted URL:** `https://bluetag-ryanhenderson.fly.dev/`
 - **Date/time PoC was verified against the hosted instance:** 2026-09-02
       (UTC ~16:5x), immediately after deploy
-- **Commit hash of the patch:** `[fill in — this project isn't in a git repo
-      yet; init one and commit the patch before submitting, then paste the
-      hash here]`
+- **Commit hash of the patch:** `c6b62e5` (repo: https://github.com/ryanhson/bluetag)
