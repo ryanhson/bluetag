@@ -1,0 +1,51 @@
+<%- include("partials/head") %>
+
+<section class="narrow">
+  <h1>Post to the board</h1>
+  <p class="lede">Be specific. A building, a color, and one odd detail is how people recognize their stuff.</p>
+
+  <% if (typeof error !== "undefined") { %>
+    <p class="flash error"><%= error %></p>
+  <% } %>
+
+  <form method="post" action="/items" class="stack">
+    <fieldset class="segmented">
+      <legend>This is</legend>
+      <label><input type="radio" name="kind" value="lost" <%= values.kind === "lost" ? "checked" : "" %>> something I lost</label>
+      <label><input type="radio" name="kind" value="found" <%= values.kind === "found" ? "checked" : "" %>> something I found</label>
+    </fieldset>
+
+    <label>
+      <span>Category</span>
+      <select name="category">
+        <% categories.forEach((c) => { %>
+          <option value="<%= c.slug %>" <%= values.category === c.slug ? "selected" : "" %>><%= c.label %></option>
+        <% }) %>
+      </select>
+    </label>
+
+    <label>
+      <span>Title</span>
+      <input type="text" name="title" value="<%= values.title || "" %>" maxlength="80" required>
+    </label>
+
+    <label>
+      <span>Description</span>
+      <textarea name="description" rows="5" required><%= values.description || "" %></textarea>
+    </label>
+
+    <label>
+      <span>Location</span>
+      <input type="text" name="location" value="<%= values.location || "" %>" required>
+    </label>
+
+    <label>
+      <span>How should people reach you?</span>
+      <input type="text" name="contactPref" value="<%= values.contactPref || currentUser.email %>">
+    </label>
+
+    <button type="submit">Publish post</button>
+  </form>
+</section>
+
+<%- include("partials/foot") %>

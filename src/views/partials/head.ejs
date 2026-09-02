@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> · BlueTag</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230b3a67'/><rect x='8' y='6' width='16' height='20' rx='2' fill='%23f4e9c8'/><rect x='8' y='6' width='16' height='5' fill='%232f7dd1'/></svg>">
+</head>
+<body>
+  <div class="frame">
+    <header class="top">
+      <a class="brand" href="/">
+        <span class="brand-mark">BT</span>
+        <span>
+          <strong>BlueTag</strong>
+          <em>Campus lost &amp; found</em>
+        </span>
+      </a>
+      <nav>
+        <a href="/">Board</a>
+        <% if (currentUser) { %>
+          <a href="/items/new">Post</a>
+          <a href="/me"><%= currentUser.displayName %></a>
+          <form class="inline" method="post" action="/logout">
+            <button type="submit">Sign out</button>
+          </form>
+        <% } else { %>
+          <a href="/login">Sign in</a>
+          <a class="btn small" href="/register">Create account</a>
+        <% } %>
+      </nav>
+    </header>
+    <% if (flash) { %>
+      <div class="flash <%= flash.type %>"><%= flash.message %></div>
+    <% } %>
+    <main>

@@ -1,0 +1,15 @@
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: "3000"
+      SESSION_SECRET: ${SESSION_SECRET:-bluetag-dev-session-secret}
+      DATABASE_PATH: /app/data/bluetag.db
+    volumes:
+      - bluetag-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  bluetag-data:

@@ -1,0 +1,39 @@
+<%- include("partials/head") %>
+
+<article class="detail">
+  <p class="crumbs"><a href="/">Board</a> / <%= item.kind %></p>
+  <div class="card-meta">
+    <span class="pill <%= item.kind %>"><%= item.kind %></span>
+    <span class="muted"><%= item.category %></span>
+    <span class="pill <%= item.status %>"><%= item.status %></span>
+  </div>
+  <h1><%= item.title %></h1>
+  <p class="lede"><%= item.description %></p>
+
+  <dl class="facts">
+    <div>
+      <dt>Last seen / found</dt>
+      <dd><%= item.location %></dd>
+    </div>
+    <div>
+      <dt>Posted by</dt>
+      <dd><%= item.owner_name %></dd>
+    </div>
+    <div>
+      <dt>Posted</dt>
+      <dd><%= item.created_at %></dd>
+    </div>
+    <div>
+      <dt>Contact</dt>
+      <dd><%= item.contact_pref %></dd>
+    </div>
+  </dl>
+
+  <% if (isOwner && item.status === "open") { %>
+    <form method="post" action="/items/<%= item.id %>/resolve">
+      <button type="submit">Mark resolved</button>
+    </form>
+  <% } %>
+</article>
+
+<%- include("partials/foot") %>

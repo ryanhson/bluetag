@@ -1,0 +1,71 @@
+<%- include("partials/head") %>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">Student-run board</p>
+    <h1>If it has a name tag, it has a way home.</h1>
+    <p class="lede">Post what you lost or found around campus. Search the board before you write off a water bottle, a wallet, or a set of keys.</p>
+  </div>
+  <aside class="ticket">
+    <span>Public board</span>
+    <strong><%= items.length %></strong>
+    <em>listings in this view</em>
+  </aside>
+</section>
+
+<form class="filters" method="get" action="/">
+  <label class="grow">
+    <span>Search posts</span>
+    <input type="search" name="q" value="<%= q %>" placeholder="hoodie, airpods, Smith Hall…">
+  </label>
+  <label>
+    <span>Kind</span>
+    <select name="kind">
+      <option value="all" <%= kind === "all" ? "selected" : "" %>>Lost + found</option>
+      <option value="lost" <%= kind === "lost" ? "selected" : "" %>>Lost</option>
+      <option value="found" <%= kind === "found" ? "selected" : "" %>>Found</option>
+    </select>
+  </label>
+  <label>
+    <span>Category</span>
+    <select name="category">
+      <option value="all" <%= category === "all" ? "selected" : "" %>>Any category</option>
+      <% categories.forEach((c) => { %>
+        <option value="<%= c.slug %>" <%= category === c.slug ? "selected" : "" %>><%= c.label %></option>
+      <% }) %>
+    </select>
+  </label>
+  <button type="submit">Search</button>
+</form>
+
+<% if (searchError) { %>
+  <p class="flash error"><%= searchError %></p>
+<% } %>
+
+<% if (items.length === 0) { %>
+  <p class="empty">Nothing matches that search. Try another word, or <a href="/items/new">post what you have</a>.</p>
+<% } else { %>
+  <ul class="cards">
+    <% items.forEach((item) => { %>
+      <li>
+        <a class="card" href="/items/<%= item.id %>">
+          <div class="card-meta">
+            <span class="pill <%= item.kind %>"><%= item.kind %></span>
+            <span class="muted"><%= item.category %></span>
+            <% if (item.status === "resolved") { %>
+              <span class="pill resolved">resolved</span>
+            <% } %>
+          </div>
+          <h2><%= item.title %></h2>
+          <p><%= item.description %></p>
+          <div class="card-foot">
+            <span><%= item.location %></span>
+            <span><%= item.owner_name %></span>
+          </div>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<%- include("partials/foot") %>

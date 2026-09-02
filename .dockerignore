@@ -1,0 +1,7 @@
+# flyctl launch added from .gitignore
+**/node_modules
+**/data/*.db
+**/data/*.db-journal
+**/.env
+**/.DS_Store
+fly.toml

@@ -1,0 +1,28 @@
+<%- include("partials/head") %>
+
+<section class="narrow">
+  <h1>Create a BlueTag account</h1>
+  <p class="lede">A .edu address keeps the board to people who actually walk this campus.</p>
+
+  <% if (typeof error !== "undefined") { %>
+    <p class="flash error"><%= error %></p>
+  <% } %>
+
+  <form method="post" action="/register" class="stack">
+    <label>
+      <span>Campus email</span>
+      <input type="email" name="email" value="<%= values.email || "" %>" required>
+    </label>
+    <label>
+      <span>Display name</span>
+      <input type="text" name="displayName" value="<%= values.displayName || "" %>" required>
+    </label>
+    <label>
+      <span>Password</span>
+      <input type="password" name="password" minlength="8" required>
+    </label>
+    <button type="submit">Create account</button>
+  </form>
+</section>
+
+<%- include("partials/foot") %>
